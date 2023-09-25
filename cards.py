@@ -4,7 +4,6 @@ import random
 # FYI - this is a thing:
 # my_type: TypeAlias = tuple[list[int], bool]
 
-#This is a comment
 
 class Hand:
     # Hand object should be
@@ -15,10 +14,21 @@ class Hand:
     def __init__(self,
                  cards: list[Card]
                 ):
+        
+        # validate cards -- no repeats
+        self.__validate_hand(cards)
         self.__cards = cards
         self.count_faces_suits()
         self.__cards_sorted = sorted(self.__cards)
         return
+    
+    def __validate_hand(self, cards:list[Card]
+                        ):
+        
+        for i in range(len(cards)): 
+            for j in range(i+1, len(cards)):
+                if cards[i] == cards[j]:
+                    raise ValueError('Hand contains two of: ' + str(cards[i]))
     
     def __create_rules(self): 
         self.__RULES = {
@@ -270,3 +280,6 @@ class Card:
     
     def __sub__(self, other):
         return self.__face - other.__face
+    
+    def __eq__(self, other):
+        return (self.__face == other.__face) and (self.__suit == other.__suit)
