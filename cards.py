@@ -4,6 +4,8 @@ import random
 # FYI - this is a thing:
 # my_type: TypeAlias = tuple[list[int], bool]
 
+#This is a comment
+
 class Hand:
     # Hand object should be
     # a collection of cards
