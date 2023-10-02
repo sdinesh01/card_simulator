@@ -47,7 +47,6 @@ class Hand:
         
         for rank, (hand_name, func) in enumerate(self.__RULES.items()):
             output = func()
-            print(hand_name, output)
             if all(output):
                 return rank, hand_name, output
         return
