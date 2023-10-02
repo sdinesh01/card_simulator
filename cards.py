@@ -44,12 +44,52 @@ class Hand:
     
     def get_best_hand(self) -> tuple[int]: # Rank of the hand (low wins)
                                      # Hand info
-        
         for rank, (hand_name, func) in enumerate(self.__RULES.items()):
             output = func()
             if all(output):
                 return rank, hand_name, output
+            
+        # write greater than 
+        # check if hands are the same
         return
+    
+    def compare_hands(self, 
+                     other):
+        hand_1 = self.get_best_hand()
+        hand_2 = other.get_best_hand()
+        # check if both hands are not equal
+        if hand_1[1] != hand_2[1]: 
+            # get indices for hands
+            for rank, (hand_name, func) in enumerate(self.__RULES.items()): 
+                if hand_name == hand_1[1]: 
+                    return hand_1, self
+                elif hand_name == hand_2[1]: 
+                    return hand_2, other
+        # if hands are equal, look at 
+        elif hand_1[1] == hand_2[1]: 
+            high_number1 = hand_1[2][0].max()
+            high_number2 = hand_2[2][0].max()
+            if high_number1 > high_number2: 
+                return hand_1, self
+            elif high_number1 == high_number2:
+                return str("It's a tie. Both hands have high number " + str(high_number1)), hand_1, hand_2
+            else: 
+                return hand_2, other
+
+            # higher hand wins
+            #enumerate through rules until you get to a match
+
+            while enumerate(self.__RULES.items())
+
+            #
+
+
+
+
+        
+        
+         # greater than 
+        
     
     def __repr__(self):
         return 'Hand with:\n' + str(self.__cards)
