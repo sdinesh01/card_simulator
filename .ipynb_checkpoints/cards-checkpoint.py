@@ -53,60 +53,42 @@ class Hand:
         # check if hands are the same
         return
     
-    def __gt__(self, other):
-        rank1, _, output1 = self.get_best_hand()
-        rank2, _, output2 = other.get_best_hand()
+    def compare_hands(self, 
+                     other):
+        hand_1 = self.get_best_hand()
+        hand_2 = other.get_best_hand()
+        # check if both hands are not equal
+        if hand_1[1] != hand_2[1]: 
+            # get indices for hands
+            for rank, (hand_name, func) in enumerate(self.__RULES.items()): 
+                if hand_name == hand_1[1]: 
+                    return hand_1, self
+                elif hand_name == hand_2[1]: 
+                    return hand_2, other
+        # if hands are equal, look at 
+        elif hand_1[1] == hand_2[1]: 
+            high_number1 = hand_1[2][0].max()
+            high_number2 = hand_2[2][0].max()
+            if high_number1 > high_number2: 
+                return hand_1, self
+            elif high_number1 == high_number2:
+                return str("It's a tie. Both hands have high number " + str(high_number1)), hand_1, hand_2
+            else: 
+                return hand_2, other
 
-        if rank1 == rank2:
-            out1 = output1[0]
-            out2 = output2[0]
-            if type(out1) == list:
-                out1 = max(out1)
-                out2 = max(out2)
-            return out1 > out2
-            
-        else:
-            return rank1 < rank2
-    
-    def __eq__(self, other):
-        rank1, _, output1 = self.get_best_hand()
-        rank2, _, output2 = other.get_best_hand()
+            # higher hand wins
+            #enumerate through rules until you get to a match
+
+            while enumerate(self.__RULES.items())
+
+            #
+
+
+
+
         
-        if rank1 == rank2:
-            out1 = output1[0]
-            out2 = output2[0]
-            if type(out1) == list:
-                out1 = max(out1)
-                out2 = max(out2)
-            return out1 == out2
-            
-        else:
-            return False
-
-
-
-    # def compare_hands(self, 
-    #                  other):
-    #     hand_1 = self.get_best_hand()
-    #     hand_2 = other.get_best_hand()
-    #     # check if both hands are not equal
-    #     if hand_1[1] != hand_2[1]: 
-    #         # get indices for hands
-    #         for rank, (hand_name, func) in enumerate(self.__RULES.items()): 
-    #             if hand_name == hand_1[1]: 
-    #                 return hand_1, self
-    #             elif hand_name == hand_2[1]: 
-    #                 return hand_2, other
-    #     # if hands are equal, look at 
-    #     elif hand_1[1] == hand_2[1]: 
-    #         high_number1 = hand_1[2][0].max()
-    #         high_number2 = hand_2[2][0].max()
-    #         if high_number1 > high_number2: 
-    #             return hand_1, self
-    #         elif high_number1 == high_number2:
-    #             return str("It's a tie. Both hands have high number " + str(high_number1)), hand_1, hand_2
-    #         else: 
-    #             return hand_2, other
+        
+         # greater than 
         
     
     def __repr__(self):
